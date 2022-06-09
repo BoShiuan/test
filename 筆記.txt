@@ -1,0 +1,82 @@
+SQL Developer
+SQL非連續性動作
+PL/SQL連續動作
+
+綠色的+
+name:jasmineAH
+角色:預設
+密碼:sleader
+
+打完按測試
+
+這個可以練語法，只能有SELECT，不要刪東西
+
+pos_policy 真正的保單
+qot_policy 報價的保單
+pos_policy_risk_item 險種主檔
+pos_policy_risk_item_amount 保額
+
+-ctrl按著點table name會出現各欄位的註解(資料欄)
+-右上有個「SQL」按鍵，裡面有完整語法，複製貼上到語法執行區域(望遠鏡左邊有個小綠人)，就可以跑出一樣的表
+-Model 會跑出一張黃底的東西，有點像資料庫的關聯，P代表主鍵，F代表外鍵
+
+連線-其他使用著-XOTCBUSR-
+
+連線設定
+綠色的+
+name:jasmineAH
+角色:預設
+帳號:sl
+密碼:sleader
+詳細資料
+softleader.com.tw
+15222
+jasmineAH
+先按測試，成功再按儲存
+
+-notapade++
+加整排逗號
+alt+shift+下(選要加的行) 再按逗號
+(方向鍵可以任意替換，只要選到要的地方也可以全部取代之類的)
+
+文字前後加引號(每行文字的長度不一樣)
+前面的跟逗號做法相同
+後面的可以在第一行先加很多空白鍵，再alt+shift+滑鼠往下拉直接點最後一行，打引號
+再ctrl+F 取代空白
+
+-快捷鍵
+快速註解ctrl+/
+快速執行ctrl+enter
+快速全選shift+上或下
+快速大小寫alt+'
+產出行號 右鍵-切換行號
+按著ctrl 再點資料表名 可以去複製欄位名稱
+
+1.select * from all_tab_columns; 稍微看一下使用者的名字
+2.select * from all_tab_columns where owner = 'XOTCBUSR'; 
+3.設定使用者 alter SESSION set current_schema = xotcbusr;
+4.select DISTINCT table_name from all_tab_columns where owner = 'XOTCBUSR'; 找指定OWNER有權限的資料表
+5.確認資料表內有沒有資料(可以用EXCEL快速寫語法)
+select 	count(*) as count,	'P_APA_AREA'	from 	P_APA_AREA	union all
+在結果顯示的地方可以用篩選
+或用下面這邊在暫存的地方建立資料表，就可以下where條件
+with a as (
+select 	count(*) as count,	'P_APA_AREA'	from 	P_APA_AREA	union all
+select 	count(*) as count,	'P_APA_IC_LINK'	from 	P_APA_IC_LINK	union all
+select 	count(*) as count,	'P_SALE_TYPE'	from 	P_SALE_TYPE	
+),b as (
+select 	count(*) as count,	'P_APA_AREA'	from 	P_APA_AREA	union all
+select 	count(*) as count,	'P_APA_IC_LINK'	from 	P_APA_IC_LINK	union all
+select 	count(*) as count,	'P_SALE_TYPE'	from 	P_SALE_TYPE	
+)
+select * from b
+where count>0;
+
+
+-快速用EXCEL寫語法
+先把不需要的欄位刪除，留下DBname跟說明
+DBname前面插入一行加逗號
+說明前面加一行加as
+全部複製貼上到notepade++確認再加select跟from
+貼到Sql執行
+*as 後面只能加一串字串
